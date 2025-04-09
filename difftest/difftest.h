@@ -107,6 +107,11 @@ typedef struct {
 #endif // CONFIG_DIFF_DEBUG_MODE
 } diff_context_t;
 
+typedef struct {
+  uint64_t minstret;
+  uint64_t mcycle;
+} diff_snapshot_t;
+
 class DifftestRefConfig {
 public:
   bool ignore_illegal_mem_access = false;
@@ -126,6 +131,7 @@ public:
   void skip_one(bool isRVC, bool wen, uint32_t wdest, uint64_t wdata);
   void get_regs(diff_context_t *ctx);
   void set_regs(diff_context_t *ctx, bool on_demand);
+  void set_snapshot(diff_snapshot_t *snapshot, bool direction);
   void memcpy_from_dut(reg_t dest, void* src, size_t n);
   void debug_memcpy_from_dut(reg_t dest, void* src, size_t n);
   int store_commit(uint64_t *addr, uint64_t *data, uint8_t *mask);

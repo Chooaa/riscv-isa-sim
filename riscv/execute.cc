@@ -323,6 +323,8 @@ void processor_t::step(size_t n)
     }
     catch(trap_t& t)
     {
+    //   printf("core %d: exception trap %d\n", id, t.cause());
+    //   printf("trap name: %s\n", t.name().c_str());
       take_trap(t, pc);
       n = instret;
 

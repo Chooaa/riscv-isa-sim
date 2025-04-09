@@ -48,7 +48,9 @@ class insn_trap_t : public trap_t
   bool has_gva() override { return gva; }
   bool has_tval() override { return true; }
   reg_t get_tval() override {
-#if defined(CPU_ROCKET_CHIP) || defined(CPU_XIANGSHAN)
+#if defined(CPU_BOOM)
+    return 0;
+#elif defined(CPU_ROCKET_CHIP) || defined(CPU_XIANGSHAN)
     return tval;
 #else
     return 0;

@@ -341,6 +341,17 @@ void DifftestRef::set_regs(diff_context_t *ctx, bool on_demand) {
 #endif // CONFIG_DIFF_SDTRIG
 }
 
+void DifftestRef::set_snapshot(diff_snapshot_t *snapshot, bool direction) {
+  if (direction == DIFFTEST_TO_REF) {
+    state->mcycle->write(snapshot->mcycle);
+    state->minstret->write(snapshot->minstret);
+  }
+  else {
+    snapshot->mcycle = state->mcycle->read();
+    snapshot->minstret = state->minstret->read();
+  }
+}
+
 void DifftestRef::memcpy_from_dut(reg_t dest, void* src, size_t n) {
   while (n) {
     char *base = sim->addr_to_mem(dest);
@@ -532,8 +543,8 @@ void difftest_regcpy(diff_context_t* dut, bool direction, bool on_demand) {
   }
 }
 
-void difftest_csrcpy(void *dut, bool direction) {
-
+void difftest_csrcpy(diff_snapshot_t *dut, bool direction) {
+  ref->set_snapshot(dut, direction);
 }
 
 void difftest_uarchstatus_sync(void *dut) {

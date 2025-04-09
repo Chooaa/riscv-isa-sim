@@ -2,6 +2,8 @@
 #define __DIFFTEST_DEF_H
 
 #if defined(CPU_NUTSHELL)
+#elif defined(CPU_BOOM)
+#define CPU_ROCKET_CHIP
 #elif defined(CPU_XIANGSHAN)
 #elif defined(CPU_ROCKET_CHIP)
 #else
@@ -10,7 +12,7 @@
 #endif
 
 #if defined(CPU_XIANGSHAN) || defined(CPU_ROCKET_CHIP)
-#define CONFIG_DIFF_FPU
+// #define CONFIG_DIFF_FPU
 #endif
 
 #if defined(CPU_XIANGSHAN)
@@ -94,7 +96,8 @@
 #define CONFIG_MISALIGNED      true
 
 #elif defined(CPU_ROCKET_CHIP)
-#define CONFIG_DIFF_ISA_STRING "rv64imafdczicsr_zifencei_zihpm_zicntr"
+// #define CONFIG_DIFF_ISA_STRING "rv64imafdczicsr_zifencei_zihpm_zicntr"
+#define CONFIG_DIFF_ISA_STRING "rv64imaczicsr_zifencei_zihpm_zicntr"
 #define CONFIG_MEMORY_SIZE     (2 * 1024 * 1024 * 1024UL)
 #define CONFIG_FLASH_BASE      0x10000000UL
 #define CONFIG_FLASH_SIZE      0x10000UL
