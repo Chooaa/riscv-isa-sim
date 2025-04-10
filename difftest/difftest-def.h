@@ -3,7 +3,6 @@
 
 #if defined(CPU_NUTSHELL)
 #elif defined(CPU_BOOM)
-#define CPU_ROCKET_CHIP
 #elif defined(CPU_XIANGSHAN)
 #elif defined(CPU_ROCKET_CHIP)
 #else
