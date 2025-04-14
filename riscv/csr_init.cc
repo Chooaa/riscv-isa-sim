@@ -245,7 +245,10 @@ void state_t::csr_init(processor_t* const proc, reg_t max_isa)
 
   add_ext_csr(EXT_ZKR, CSR_SEED, std::make_shared<seed_csr_t>(proc, CSR_SEED));
 
-#ifdef CPU_ROCKET_CHIP
+#ifdef CPU_BOOM
+  add_csr(CSR_MARCHID, std::make_shared<const_csr_t>(proc, CSR_MARCHID, 2));
+  add_csr(CSR_MIMPID, std::make_shared<const_csr_t>(proc, CSR_MIMPID, 0));
+#elif defined(CPU_ROCKET_CHIP)
   add_csr(CSR_MARCHID, std::make_shared<const_csr_t>(proc, CSR_MARCHID, 1));
   add_csr(CSR_MIMPID, std::make_shared<const_csr_t>(proc, CSR_MIMPID, 0x20181004));
 #elif defined(CPU_NUTSHELL)
